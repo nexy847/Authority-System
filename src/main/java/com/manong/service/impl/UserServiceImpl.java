@@ -1,5 +1,6 @@
 package com.manong.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.manong.entity.User;
 import com.manong.dao.UserMapper;
 import com.manong.service.UserService;
@@ -11,4 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    @Override
+    public User findUserByUserName(String username) {
+        QueryWrapper<User> queryWrapper=new QueryWrapper<User>();
+        queryWrapper.eq("username",username);
+        return baseMapper.selectOne(queryWrapper);
+    }
 }

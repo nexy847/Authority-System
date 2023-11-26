@@ -26,4 +26,20 @@
         id, label, parent_id, parent_name, code, path, name, url, type, icon, create_time, update_time, remark, order_num, is_delete
     </sql>
 
+    <select id="findPermissionListByUserId"
+            resultType="com.manong.entity.Permission">
+        select
+            DISTINCT
+            p.id,p.parent_id,p.label,p.`code`,p.url,p.type,p.icon,p.remark,p.path,p.name
+        from
+            sys_user as u
+                left join sys_user_role as ur on u.id = ur.user_id
+                left join sys_role as r on ur.role_id = r.id
+                left join sys_role_permission as rp on rp.role_id = r.id
+                left join sys_permission as p on rp.permission_id = p.id
+        where u.id =#{userId}
+        order by p.id asc
+    </select>
+
+
 </mapper>
