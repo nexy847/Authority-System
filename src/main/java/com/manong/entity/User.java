@@ -1,9 +1,6 @@
 package com.manong.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Collection;
 import java.util.Date;
@@ -28,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @TableName("sys_user")
 public class User implements Serializable, UserDetails {
 
+    //实现了Serializable接口,它的存在可以确保新旧版本的类仍然能够正确地进行序列化和反序列化
     private static final long serialVersionUID = 1L;
 
     /**
@@ -46,6 +44,7 @@ public class User implements Serializable, UserDetails {
      */
     private String password;
 
+    //一下四个is是否字段用以spring security设置(UserDetails),最好在数据库也设置上
     /**
      * 帐户是否过期(1-未过期，0-已过期)
      */
@@ -114,11 +113,13 @@ public class User implements Serializable, UserDetails {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 修改时间
      */
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
 
     /**

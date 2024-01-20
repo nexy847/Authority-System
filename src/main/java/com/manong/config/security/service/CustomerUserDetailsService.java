@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class CustomerUserDetailsService implements UserDetailsService {
+public class CustomerUserDetailsService implements UserDetailsService {//完成用户的认证(用户信息)与授权(管理员和普通用户)
     @Resource
     private UserService userService;
     @Resource
@@ -30,6 +30,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
         }
         //查询用户所拥有的权限列表
         List<Permission> permissionList= permissionService.findPermissionListByUserId(user.getId());
+        System.out.println("这是权限字段"+permissionList);
         //获取权限编码
         List<String> collect=permissionList.stream()
                 .filter(item->item!=null)
@@ -39,9 +40,9 @@ public class CustomerUserDetailsService implements UserDetailsService {
         String[] strings=collect.toArray(new String[collect.size()]);
         //设置权限列表
         List<GrantedAuthority> authorities=AuthorityUtils.createAuthorityList(strings);
-        user.setAuthorities(authorities);
+        user.setAuthorities(authorities);//权限字段:Code
         //设置菜单列表
-        user.setPermissionList(permissionList);
+        user.setPermissionList(permissionList);//用户菜单表的所有信息
         return user;
     }
 }

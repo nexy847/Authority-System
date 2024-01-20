@@ -20,6 +20,8 @@
         <jwt.version>0.9.1</jwt.version>
         <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <fastjson.version>1.2.80</fastjson.version>
+        <aliyun.oss.version>3.14.1</aliyun.oss.version>
+        <joda-time.version>2.10.14</joda-time.version>
     </properties>
 
     <dependencies>
@@ -88,6 +90,26 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
+        <!-- 阿里云OSS文件上传开始 -->
+        <!-- 阿里云 OSS -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${aliyun.oss.version}</version>
+        </dependency>
+        <!--日期时间工具-->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <!-- 阿里云OSS文件上传结束 -->
     </dependencies>
 
     <build>

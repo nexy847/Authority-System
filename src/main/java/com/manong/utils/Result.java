@@ -85,10 +85,10 @@ public class Result<T> {
      */
     public static<T> Result<T> exist(){
         Result<T> result = new Result<T>();
-        result.setSuccess(true);
-        result.setCode(ResultCode.SUCCESS);
-        result.setMessage("执行成功");
+        result.setSuccess(false);//存在该数据
+        //由于vue-element-admin模板在响应时验证状态码是否是200，如果不是200，则报错
+        result.setCode(ResultCode.SUCCESS);//执行成功，但存在该数据
+        result.setMessage("该数据存在");
         return result;
     }
-
 }

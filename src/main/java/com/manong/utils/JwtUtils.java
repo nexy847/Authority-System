@@ -12,21 +12,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
-@ConfigurationProperties(prefix = "jwt")
+@ConfigurationProperties(prefix = "jwt")//用以绑定和映射配置文件中的属性到 Java 对象上,以"jwt"为前缀的属性
 @Component
 public class JwtUtils {
-    //密钥
+    //密钥(这两个属性的值是从配置文件中以jwt为前缀的属性中读取的)
     private String secret;
     // 过期时间 毫秒
     private Long expiration;
-/**
- * 从数据声明生成令牌
- *
- * @param claims 数据声明
- * @return 令牌
- */
+    /**
+     * 从数据声明生成令牌
+     *
+     * @param claims 数据声明
+     * @return 令牌
+     */
     private String generateToken(Map<String, Object> claims) {
         Date expirationDate = new Date(System.currentTimeMillis() + expiration);
+        //此处生成token,claims和expiration声明都是payload负载的一部分,后使用"HS512"的alg,以"JWT" 为typ(这些作为header),提供配置文件的密钥,生成signature签名
         return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, secret).compact();
     }
     /**

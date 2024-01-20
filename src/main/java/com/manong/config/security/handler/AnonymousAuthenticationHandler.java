@@ -24,7 +24,7 @@ public class AnonymousAuthenticationHandler implements AuthenticationEntryPoint 
         //获取输出流
         ServletOutputStream outputStream = response.getOutputStream();
         //消除循环引用
-        String result = JSON.toJSONString(Result.error().code(600).message("匿名用 户无权限访问！"),
+        String result = JSON.toJSONString(Result.error().code(600).message("匿名用户无权限访问！"),
                 SerializerFeature.DisableCircularReferenceDetect);
                 outputStream.write(result.getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
